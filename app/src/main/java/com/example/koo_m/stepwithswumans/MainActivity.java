@@ -1,10 +1,12 @@
 package com.example.koo_m.stepwithswumans;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
+    private  Fragment fragment;
     ImageView map1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         setupDrawerContent(navigationView);
-
 
         Button b2 = (Button)findViewById(R.id.button2);
         map1= (ImageView)findViewById(R.id.imageView);
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
+        fragment = null;
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
