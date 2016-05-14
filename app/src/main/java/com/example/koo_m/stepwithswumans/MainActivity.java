@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-
-
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener(){
@@ -83,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        fragmentManager.beginTransaction().add(R.id.flContent, fragment).addToBackStack(null).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
@@ -98,7 +96,12 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+            return;
+        }else if(getFragmentManager().getBackStackEntryCount() > 0){
+            getFragmentManager().popBackStack();
+
+            return;
+        }else {
             super.onBackPressed();
         }
     }
