@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private  Fragment fragment;
-    ImageView map1;
+    FragmentManager fragmentManager = getSupportFragmentManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +40,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         setupDrawerContent(navigationView);
 
-        Button b2 = (Button)findViewById(R.id.button2);
-        map1= (ImageView)findViewById(R.id.imageView);
-        map1.setVisibility(View.INVISIBLE);
+        fragmentManager.beginTransaction().add(R.id.flContent, new Fragment1()).commit();
 
-        b2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                map1.setVisibility(View.VISIBLE);
-            }
-        });
-
-    }
+}
 
 
 
@@ -92,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
