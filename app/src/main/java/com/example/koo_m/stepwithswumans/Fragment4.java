@@ -15,6 +15,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
@@ -22,11 +23,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
 
-public class Fragment4 extends Fragment{
+public class Fragment4 extends Fragment {
+    NavigationView nv;
 
     public Fragment4() {
     }
@@ -34,7 +37,16 @@ public class Fragment4 extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment4, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment4, container, false);
+        nv = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Setting");
+        nv.setCheckedItem(R.id.nav_first_fragment);
+        Toast.makeText(getActivity(), "Setting", Toast.LENGTH_SHORT).show();
     }
 }
