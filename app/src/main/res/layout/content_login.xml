@@ -18,13 +18,13 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="건너뛰기"
         android:id="@+id/textView"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
         android:autoLink="all"
         android:layout_gravity="center_vertical"
         android:textColor="#0b1abd"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:layout_alignTop="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="88dp" />
 
 
     <Button
@@ -32,6 +32,9 @@
         android:layout_height="wrap_content"
         android:text="Log in"
         android:id="@+id/button"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="164dp" />
+
 </RelativeLayout>

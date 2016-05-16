@@ -1,5 +1,6 @@
 package com.example.koo_m.stepwithswumans;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
 
         fragmentManager.beginTransaction().add(R.id.flContent, new Fragment1()).commit();
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

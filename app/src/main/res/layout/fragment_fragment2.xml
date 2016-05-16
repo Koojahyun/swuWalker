@@ -1,15 +1,21 @@
-<FrameLayout android:id="@+id/Counter"
+<RelativeLayout android:id="@+id/Counter"
              xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#ff0000"
              tools:context="com.example.koo_m.stepwithswumans.Fragment2">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment2"/>
+        android:layout_width="194dp"
+        android:layout_height="266dp"
+        android:gravity="center"
+        android:id="@+id/cntView"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="87dp"
+        android:textSize="46pt"
+        android:textColor="#800080"/>
 
-</FrameLayout>
+</RelativeLayout>

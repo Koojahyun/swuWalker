@@ -46,7 +46,6 @@ public class Fragment4 extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Setting");
-        nv.setCheckedItem(R.id.nav_first_fragment);
-        Toast.makeText(getActivity(), "Setting", Toast.LENGTH_SHORT).show();
+        nv.setCheckedItem(R.id.nav_forth_fragment);
     }
 }

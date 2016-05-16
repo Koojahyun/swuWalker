@@ -42,6 +42,5 @@ public class Fragment1 extends Fragment {
         super.onResume();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Map");
         nv.setCheckedItem(R.id.nav_first_fragment);
-        Toast.makeText(getActivity(), "Map", Toast.LENGTH_SHORT).show();
     }
 }

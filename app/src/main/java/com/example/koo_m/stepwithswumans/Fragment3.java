@@ -28,7 +28,6 @@ public class Fragment3 extends Fragment {
     public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Level");
-        nv.setCheckedItem(R.id.nav_first_fragment);
-        Toast.makeText(getActivity(), "Level", Toast.LENGTH_SHORT).show();
+        nv.setCheckedItem(R.id.nav_third_fragment);
     }
 }
