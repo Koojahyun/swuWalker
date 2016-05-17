@@ -1,7 +1,13 @@
 package com.example.koo_m.stepwithswumans;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -12,12 +18,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener, BackgroundResultReceiver.Receiver {
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private Fragment fragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
+    public static int count = 0;
+    private long lastTime;
+    private float speed;
+    private float lastX;
+    private float lastY;
+    private float lastZ;
+    private float x, y, z;
+
+    private static final int SHAKE_THRESHOLD = 800;
+    private static final int DATA_X = SensorManager.DATA_X;
+    private static final int DATA_Y = SensorManager.DATA_Y;
+    private static final int DATA_Z = SensorManager.DATA_Z;
+
+    private SensorManager sensorManager;
+    private Sensor accelerormeterSensor;
+
+    public BackgroundResultReceiver mReceiver;
+    boolean isFinish = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager.beginTransaction().add(R.id.flContent, new Fragment1()).commit();
 
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -116,5 +144,104 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (accelerormeterSensor != null)
+            sensorManager.registerListener(this, accelerormeterSensor, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (sensorManager != null)
+            sensorManager.unregisterListener(this);
+
+        Toast.makeText(getApplicationContext(),
+                "onStop", Toast.LENGTH_LONG).show();
+
+        mReceiver = new BackgroundResultReceiver(new Handler());
+        mReceiver.setReceiver(this);
+
+
+        final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
+
+
+        intent.putExtra("count", count);
+
+        intent.putExtra("receiver", mReceiver);
+        intent.putExtra("command", "increase count");
+        startService(intent);
+    }
+
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            long currentTime = System.currentTimeMillis();
+            long gabOfTime = (currentTime - lastTime);
+            if (gabOfTime > 100) {
+                lastTime = currentTime;
+                x = event.values[SensorManager.DATA_X];
+                y = event.values[SensorManager.DATA_Y];
+                z = event.values[SensorManager.DATA_Z];
+
+                speed = Math.abs(x + y + z - lastX - lastY - lastZ) / gabOfTime * 10000;
+
+                if (speed > SHAKE_THRESHOLD) {
+                    Fragment2.textView.setText("" + (++count));
+                }
+
+                lastX = event.values[DATA_X];
+                lastY = event.values[DATA_Y];
+                lastZ = event.values[DATA_Z];
+            }
+
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Toast.makeText(getApplicationContext(),
+                "onRestart", Toast.LENGTH_LONG).show();
+
+        final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
+        stopService(intent);
+
+
+    }
+
+    public void onReceiveResult(int resultCode, Bundle resultData) {
+        switch (resultCode) {
+            case BackgroundService.STATUS_RUNNING:
+
+                Toast.makeText(this, "STATUS_RUNNING", Toast.LENGTH_LONG).show();
+                break;
+
+
+            case BackgroundService.STATUS_FINISHED:
+
+                count = resultData.getInt("back");
+                String str = Integer.toString(count);
+
+                Fragment2.textView.setText(str);
+
+                Toast.makeText(this, "STATUS_FINISHED", Toast.LENGTH_LONG).show();
+
+                break;
+
+
+            case BackgroundService.STATUS_ERROR:
+                Toast.makeText(this, "STATUS_ERROR", Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 }
