@@ -189,7 +189,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 speed = Math.abs(x + y + z - lastX - lastY - lastZ) / gabOfTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
-                    Fragment2.textView.setText("" + (++count));
+                    ++count;
+                    int backStack = fragmentManager.getBackStackEntryCount();
+                    fragmentManager.getFragments().get(backStack).onResume();
                 }
 
                 lastX = event.values[DATA_X];
@@ -244,4 +246,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
     }
+
 }

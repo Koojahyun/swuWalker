@@ -21,7 +21,6 @@ public class Fragment2 extends Fragment{
     NavigationView nv;
 
     static TextView textView;
-    int count;
 
     public Fragment2() {
     }
@@ -43,7 +42,10 @@ public class Fragment2 extends Fragment{
         super.onResume();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Counter");
         nv.setCheckedItem(R.id.nav_second_fragment);
+        textView.setText("" + MainActivity.count);
     }
+
+
 
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
