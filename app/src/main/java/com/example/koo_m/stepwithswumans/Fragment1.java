@@ -17,6 +17,8 @@ import android.widget.Toast;
 public class Fragment1 extends Fragment {
     ImageView map1;
     Button b2;
+    Button b3;
+    Button b4;
     NavigationView nv;
 
     public Fragment1() {
@@ -28,12 +30,12 @@ public class Fragment1 extends Fragment {
         View view = inflater.inflate(R.layout.content_main, container, false);
         nv = (NavigationView)getActivity().findViewById(R.id.nav_view);
         b2 = (Button) view.findViewById(R.id.button2);
-        //map1 = (ImageView) view.findViewById(R.id.imageView);
-        //map1.setVisibility(View.INVISIBLE);
+        b3 = (Button)view.findViewById(R.id.button3);
+        b4 = (Button)view.findViewById(R.id.button4);
+
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // map1.setVisibility(View.VISIBLE);
                 Toast.makeText(getActivity(),"다이어트를 선택하셨습니다",Toast.LENGTH_SHORT).show();
                 PopupMenu popup = new PopupMenu(getActivity(),b2);
                 popup.getMenuInflater().inflate(R.menu.diet_popup,popup.getMenu());
@@ -48,6 +50,20 @@ public class Fragment1 extends Fragment {
                 popup.show();
             }
         });
+        b3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"산책을 선택하셨습니다",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        b4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"강의실이동을 선택하셨습니다",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 
