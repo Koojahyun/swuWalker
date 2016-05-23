@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 
@@ -26,12 +28,24 @@ public class Fragment1 extends Fragment {
         View view = inflater.inflate(R.layout.content_main, container, false);
         nv = (NavigationView)getActivity().findViewById(R.id.nav_view);
         b2 = (Button) view.findViewById(R.id.button2);
-        map1 = (ImageView) view.findViewById(R.id.imageView);
-        map1.setVisibility(View.INVISIBLE);
+        //map1 = (ImageView) view.findViewById(R.id.imageView);
+        //map1.setVisibility(View.INVISIBLE);
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                map1.setVisibility(View.VISIBLE);
+               // map1.setVisibility(View.VISIBLE);
+                Toast.makeText(getActivity(),"다이어트를 선택하셨습니다",Toast.LENGTH_SHORT).show();
+                PopupMenu popup = new PopupMenu(getActivity(),b2);
+                popup.getMenuInflater().inflate(R.menu.diet_popup,popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Toast.makeText(getActivity(),item.getTitle() + " 코스를 선택하셨습니다",Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                popup.show();
             }
         });
         return view;
