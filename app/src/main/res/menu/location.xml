@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/loc_01"
+        android:title="정문"/>
+    <item
+        android:id="@+id/loc_02"
+        android:title="50주년 기념관"/>
+    <item
+        android:id="@+id/loc_03"
+        android:title="기독교 교육관"/>
+    <item
+        android:id="@+id/loc_04"
+        android:title="인문 사회관"/>
+    <item
+        android:id="@+id/loc_05"
+        android:title="대강당"/>
+    <item
+        android:id="@+id/loc_06"
+        android:title="조형 예술관"/>
+    <item
+        android:id="@+id/loc_07"
+        android:title="학생 누리관"/>
+    <item
+        android:id="@+id/loc_08"
+        android:title="중앙 도서관"/>
+    <item
+        android:id="@+id/loc_09"
+        android:title="체육관"/>
+    <item
+        android:id="@+id/loc_10"
+        android:title="바롬인성 교육관"/>
+    <item
+        android:id="@+id/loc_11"
+        android:title="제1과학관"/>
+    <item
+        android:id="@+id/loc_12"
+        android:title="제2과학관"/>
+    <item
+        android:id="@+id/loc_13"
+        android:title="남문"/>
+</menu>
