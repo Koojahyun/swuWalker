@@ -28,6 +28,8 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_main, container, false);
+        ImageView iv[][] = new ImageView[13][13];
+
         nv = (NavigationView)getActivity().findViewById(R.id.nav_view);
         b2 = (Button) view.findViewById(R.id.button2);
         b3 = (Button)view.findViewById(R.id.button3);
@@ -61,6 +63,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(),"강의실이동을 선택하셨습니다",Toast.LENGTH_SHORT).show();
+
             }
         });
 
