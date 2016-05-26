@@ -4,7 +4,10 @@ package com.example.koo_m.stepwithswumans;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -105,41 +108,59 @@ public class Fragment1 extends Fragment {
                         //지도 뜨도록 구현
                         try {
                             int x = startLocation.getSelectedItemPosition();
-                            int y = destLocation.getSelectedItemPosition() - 1;
+                            int y = destLocation.getSelectedItemPosition();
+                            if (x == y) {
+                                view.setBackgroundResource(R.drawable.mapdefault1);
 
+                               /* LinearLayout layoutOfPopup = new LinearLayout();
+                                TextView popupText = new TextView(getActivity());
+                                Button insidePopupButton = new Button(getActivity());
+                                insidePopupButton.setText("OK");
+
+                                popupText.setText("같은 곳 아니야?");
+                                popupText.setPadding(0, 0, 0, 20);
+                                layoutOfPopup.addView(popupText);
+                                layoutOfPopup.addView(insidePopupButton);
+                                final PopupWindow popupWindow = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.FILL_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                                insidePopupButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        popupWindow.dismiss();
+                                    }
+                                });
+                            popupWindow.setContentView(layoutOfPopup);*/
+                        }else{
+                            if (x > y) {
+                                int a = x;
+                                int b = y;
+                                x = b;
+                                y = a;
+                            }
                             MapSelect.getImageId(x, y);
                             view.setBackgroundResource(MapSelect.loc[x][y]);
-                        } catch (Exception e) {
-                            e.getMessage();
-                            e.getStackTrace();
-
-                            /*LinearLayout layoutOfPopup = new LinearLayout(getActivity());
-                            TextView popupText = new TextView(getActivity());
-                            Button insidePopupButton = new Button(getActivity());
-                            insidePopupButton.setText("OK");
-
-                            popupText.setText("같은 곳 아니야?");
-                            popupText.setPadding(0, 0, 0, 20);
-                            layoutOfPopup.addView(popupText);
-                            layoutOfPopup.addView(insidePopupButton);
-                            final PopupWindow popupWindow = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.FILL_PARENT,
-                                    LinearLayout.LayoutParams.WRAP_CONTENT);;
-                            insidePopupButton.setOnClickListener(new View.OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    popupWindow.dismiss();
-                                }
-                            });
-                            popupWindow.setContentView(layoutOfPopup);*/
                         }
                     }
-                });
-                alert.show();
+
+                    catch(
+                    Exception e
+                    )
+
+                    {
+                        e.getMessage();
+                        e.getStackTrace();
+                    }
+                }
             }
-        });
-        return view;
+
+            );
+            alert.show();
+        }
     }
+
+    );
+    return view;
+}
 
     @Override
     public void onResume() {
