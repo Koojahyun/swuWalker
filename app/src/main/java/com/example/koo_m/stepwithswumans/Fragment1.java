@@ -78,7 +78,6 @@ public class Fragment1 extends Fragment {
         b4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 View alertLayout = null;
 
                 if (alertLayout == null) {
@@ -103,14 +102,14 @@ public class Fragment1 extends Fragment {
                 alert.setCancelable(true);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //지도 뜨도록 구현
-                        try {
-                            int x = startLocation.getSelectedItemPosition();
-                            int y = destLocation.getSelectedItemPosition();
-                            if (x == y) {
-                                view.setBackgroundResource(R.drawable.mapdefault1);
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //지도 뜨도록 구현
+                                try {
+                                    int x = startLocation.getSelectedItemPosition();
+                                    int y = destLocation.getSelectedItemPosition();
+                                    if (x == y) {
+                                        view.setBackgroundResource(R.drawable.mapdefault1);
 
                                /* LinearLayout layoutOfPopup = new LinearLayout();
                                 TextView popupText = new TextView(getActivity());
@@ -130,37 +129,29 @@ public class Fragment1 extends Fragment {
                                     }
                                 });
                             popupWindow.setContentView(layoutOfPopup);*/
-                        }else{
-                            if (x > y) {
-                                int a = x;
-                                int b = y;
-                                x = b;
-                                y = a;
+                                    } else {
+                                        if (x > y) {
+                                            int a = x;
+                                            int b = y;
+                                            x = b;
+                                            y = a;
+                                        }
+                                        MapSelect.getImageId(x, y);
+                                        view.setBackgroundResource(MapSelect.loc[x][y]);
+                                    }
+                                } catch (Exception e) {
+                                    e.getMessage();
+                                    e.getStackTrace();
+                                }
                             }
-                            MapSelect.getImageId(x, y);
-                            view.setBackgroundResource(MapSelect.loc[x][y]);
                         }
-                    }
 
-                    catch(
-                    Exception e
-                    )
-
-                    {
-                        e.getMessage();
-                        e.getStackTrace();
-                    }
-                }
+                );
+                alert.show();
             }
-
-            );
-            alert.show();
-        }
+        });
+        return view;
     }
-
-    );
-    return view;
-}
 
     @Override
     public void onResume() {

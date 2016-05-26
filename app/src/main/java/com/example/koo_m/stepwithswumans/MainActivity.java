@@ -218,7 +218,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
         stopService(intent);
 
-
     }
 
     public void onReceiveResult(int resultCode, Bundle resultData) {
