@@ -143,25 +143,17 @@ public class Fragment1 extends Fragment {
                                     int y = destLocation.getSelectedItemPosition();
                                     if (x == y) {
                                         view.setBackgroundResource(R.drawable.mapdefault1);
+                                        AlertDialog.Builder popup =  new AlertDialog.Builder(getActivity());
+                                        popup.setPositiveButton("OK",new DialogInterface.OnClickListener(){
 
-                               /* LinearLayout layoutOfPopup = new LinearLayout();
-                                TextView popupText = new TextView(getActivity());
-                                Button insidePopupButton = new Button(getActivity());
-                                insidePopupButton.setText("OK");
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                        popup.setMessage("같은 곳을 선택했어요!");
+                                        popup.show();
 
-                                popupText.setText("같은 곳 아니야?");
-                                popupText.setPadding(0, 0, 0, 20);
-                                layoutOfPopup.addView(popupText);
-                                layoutOfPopup.addView(insidePopupButton);
-                                final PopupWindow popupWindow = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.FILL_PARENT,
-                                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                                insidePopupButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        popupWindow.dismiss();
-                                    }
-                                });
-                            popupWindow.setContentView(layoutOfPopup);*/
                                     } else {
                                         if (x > y) {
                                             int a = x;
@@ -169,17 +161,14 @@ public class Fragment1 extends Fragment {
                                             x = b;
                                             y = a;
                                         }
-                                        MapSelect.getImageId(x, y);
-                                        view.setBackgroundResource(MapSelect.loc[x][y]);
+                                        view.setBackgroundResource(MapSelect.getImageId(x,y));
                                     }
                                 } catch (Exception e) {
                                     e.getMessage();
                                     e.getStackTrace();
                                 }
                             }
-                        }
-
-                );
+                        });
                 alert.show();
             }
         });
