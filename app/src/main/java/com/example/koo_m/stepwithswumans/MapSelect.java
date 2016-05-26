@@ -17,9 +17,11 @@ public class MapSelect {
             0,0,0,0,0,0,0,0,0,R.drawable.swsm_mapclass69,R.drawable.swsm_mapclass70,R.drawable.swsm_mapclass71,R.drawable.swsm_mapclass72},{0,0,0,0,0,0,0,0,0,0,R.drawable.swsm_mapclass73,R.drawable.swsm_mapclass74,
             R.drawable.swsm_mapclass75},{0,0,0,0,0,0,0,0,0,0,0,R.drawable.swsm_mapclass76,R.drawable.swsm_mapclass77},{0,0,0,0,0,0,0,0,0,0,0,0,R.drawable.swsm_mapclass78}};
 
+    static int[] walk = {R.drawable.swsm_mapwalk01,R.drawable.swsm_mapwalk02,R.drawable.swsm_mapwalk03,R.drawable.swsm_mapwalk04,R.drawable.swsm_mapwalk05,R.drawable.swsm_mapwalk06};
     public static int getImageId(int x, int y) {
         return loc[x][y];
     }
+    public static int getWalkId(int x){return walk[x];}
 
     MapSelect() {
 

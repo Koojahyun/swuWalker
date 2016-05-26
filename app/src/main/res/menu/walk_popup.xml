@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/walk1"
+        android:title="walk1"/>
+    <item
+        android:id="@+id/walk2"
+        android:title="walk2"/>
+    <item
+        android:id="@+id/walk3"
+        android:title="walk3"/>
+    <item
+        android:id="@+id/walk4"
+        android:title="walk4"/>
+    <item
+        android:id="@+id/walk5"
+        android:title="walk5"/>
+    <item
+        android:id="@+id/walk6"
+        android:title="walk6"/>
+</menu>

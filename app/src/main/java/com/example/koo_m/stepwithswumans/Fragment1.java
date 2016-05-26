@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,6 +73,38 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "산책을 선택하셨습니다", Toast.LENGTH_SHORT).show();
+                PopupMenu popup = new PopupMenu(getActivity(), b3);
+                popup.getMenuInflater().inflate(R.menu.walk_popup, popup.getMenu());
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.walk1:
+                                view.setBackgroundResource(MapSelect.getWalkId(0));
+                                break;
+                            case R.id.walk2:
+                                view.setBackgroundResource(MapSelect.getWalkId(1));
+                                break;
+                            case R.id.walk3:
+                                view.setBackgroundResource(MapSelect.getWalkId(2));
+                                break;
+                            case R.id.walk4:
+                                view.setBackgroundResource(MapSelect.getWalkId(3));
+                                break;
+                            case R.id.walk5:
+                                view.setBackgroundResource(MapSelect.getWalkId(4));
+                                break;
+                            case R.id.walk6:
+                                view.setBackgroundResource(MapSelect.getWalkId(5));
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
             }
         });
 
