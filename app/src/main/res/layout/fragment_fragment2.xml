@@ -18,4 +18,31 @@
         android:textSize="46pt"
         android:textColor="#800080"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/todayCntView"
+        android:layout_marginTop="76dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/weekCntView"
+        android:layout_marginEnd="41dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/weekCntView"
+        android:layout_alignTop="@+id/todayCntView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/totalCntView"
+        android:layout_alignTop="@+id/weekCntView"
+        android:layout_toEndOf="@+id/weekCntView"
+        android:layout_marginStart="39dp" />
+
 </RelativeLayout>
