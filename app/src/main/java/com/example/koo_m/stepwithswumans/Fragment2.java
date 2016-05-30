@@ -2,6 +2,7 @@ package com.example.koo_m.stepwithswumans;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -21,6 +22,8 @@ public class Fragment2 extends Fragment{
     NavigationView nv;
 
     static TextView textView;
+    static TextView textViewDB;
+    static TextView textViewDB2;
 
     public Fragment2() {
     }
@@ -32,8 +35,15 @@ public class Fragment2 extends Fragment{
         nv = (NavigationView) getActivity().findViewById(R.id.nav_view);
 
         textView = (TextView) view.findViewById(R.id.cntView);
+        textViewDB = (TextView) view.findViewById(R.id.todayCntView);
+        textViewDB2 = (TextView) view.findViewById(R.id.weekCntView);
 
         textView.setText("" + MainActivity.count);
+
+        Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT * FROM COUNT",null);
+        resultSet.moveToFirst();
+        textViewDB.setText(resultSet.getString(2));
+
         return view;
     }
 

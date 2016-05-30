@@ -2,6 +2,8 @@ package com.example.koo_m.stepwithswumans;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public BackgroundResultReceiver mReceiver;
     boolean isFinish = false;
 
+    public static SQLiteDatabase mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        //DBOpenHelper DBHelp = new DBOpenHelper(this);
+        mDatabase = openOrCreateDatabase("WalkCount",MODE_PRIVATE,null);
+        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS COUNT(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-29','8500')");
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
