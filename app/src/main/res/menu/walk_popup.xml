@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/walk1"
-        android:title="walk1"/>
+        android:title="바롬산책길1"/>
     <item
         android:id="@+id/walk2"
-        android:title="walk2"/>
+        android:title="바롬산책길2"/>
     <item
         android:id="@+id/walk3"
-        android:title="walk3"/>
+        android:title="바롬산책길3"/>
     <item
         android:id="@+id/walk4"
-        android:title="walk4"/>
+        android:title="바롬산책길4"/>
     <item
         android:id="@+id/walk5"
-        android:title="walk5"/>
+        android:title="사택산책길"/>
     <item
         android:id="@+id/walk6"
-        android:title="walk6"/>
+        android:title="삼각숲산책길"/>
 </menu>

@@ -62,8 +62,26 @@ public class Fragment1 extends Fragment {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(getActivity(), item.getTitle() + " 코스를 선택하셨습니다", Toast.LENGTH_SHORT).show();
-                        return true;
+                        switch (item.getItemId()) {
+                            case R.id.diet_10:
+                                view.setBackgroundResource(MapSelect.getDiet(0));
+                                break;
+                            case R.id.diet_15:
+                                view.setBackgroundResource(MapSelect.getDiet(1));
+                                break;
+                            case R.id.diet_20:
+                                view.setBackgroundResource(MapSelect.getDiet(2));
+                                break;
+                            case R.id.diet_25:
+                                view.setBackgroundResource(MapSelect.getDiet(3));
+                                break;
+                            case R.id.diet_30:
+                                view.setBackgroundResource(MapSelect.getDiet(4));
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
                     }
                 });
                 popup.show();
