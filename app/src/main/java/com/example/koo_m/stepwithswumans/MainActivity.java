@@ -174,16 +174,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mReceiver = new BackgroundResultReceiver(new Handler());
         mReceiver.setReceiver(this);
 
-
         final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
 
-
         intent.putExtra("count", count);
-
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("command", "increase count");
         startService(intent);
     }
+
 
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -254,5 +252,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
     }
-
 }
