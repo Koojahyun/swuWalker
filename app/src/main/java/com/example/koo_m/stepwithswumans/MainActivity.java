@@ -74,6 +74,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mDatabase = openOrCreateDatabase("WalkCount",MODE_PRIVATE,null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS COUNT(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
         mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-29','8500')");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-30','12000')");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-06-01','850')");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-06-02','80')");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-06-03','500')");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-28','8500')");
+        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-31','851')");
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

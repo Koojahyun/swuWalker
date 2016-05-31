@@ -43,6 +43,9 @@ public class Fragment2 extends Fragment{
         Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT * FROM COUNT",null);
         resultSet.moveToFirst();
         textViewDB.setText(resultSet.getString(2));
+        Cursor resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM COUNT WHERE DATE BETWEEN 2016-05-28 AND 2016-06-03",null);
+        resultSet2.moveToFirst();
+        textViewDB2.setText(resultSet2.getString(2));
 
         return view;
     }
