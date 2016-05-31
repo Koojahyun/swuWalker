@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener, BackgroundResultReceiver.Receiver {
     private DrawerLayout drawer;
@@ -48,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     boolean isFinish = false;
 
     public static SQLiteDatabase mDatabase;
+    public static String currentDate;
+    public static Calendar weekAgo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +83,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerormeterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = dateFormat.format(new Date());
+
+        weekAgo = Calendar.getInstance();
+        weekAgo.add(Calendar.DATE, -7);
+
+        Toast.makeText(this, currentDate, Toast.LENGTH_SHORT).show();
+
         //DBOpenHelper DBHelp = new DBOpenHelper(this);
-        mDatabase = openOrCreateDatabase("WalkCount",MODE_PRIVATE,null);
-        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS COUNT(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-29','8500')");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-30','12000')");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-06-01','850')");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-06-02','80')");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-06-03','500')");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-28','8500')");
-        mDatabase.execSQL("INSERT INTO COUNT('DATE','COUNT') VALUES('2016-05-31','851')");
+        mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
+        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");/*
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-29','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-30','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-06-01','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-06-02','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-06-03','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-28','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-31','1')");*/
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('"+currentDate+"','100')");
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -164,13 +186,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onStart() {
         super.onStart();
+
         if (accelerormeterSensor != null)
             sensorManager.registerListener(this, accelerormeterSensor, SensorManager.SENSOR_DELAY_GAME);
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
+
         if (sensorManager != null)
             sensorManager.unregisterListener(this);
 
@@ -186,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("command", "increase count");
         startService(intent);
+
     }
 
 
@@ -258,4 +284,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
     }
+    //onDestory 될때 count 값 db에 저장하기
 }

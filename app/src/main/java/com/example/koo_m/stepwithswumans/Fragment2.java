@@ -24,6 +24,7 @@ public class Fragment2 extends Fragment{
     static TextView textView;
     static TextView textViewDB;
     static TextView textViewDB2;
+    static TextView textViewDB3;
 
     public Fragment2() {
     }
@@ -37,15 +38,27 @@ public class Fragment2 extends Fragment{
         textView = (TextView) view.findViewById(R.id.cntView);
         textViewDB = (TextView) view.findViewById(R.id.todayCntView);
         textViewDB2 = (TextView) view.findViewById(R.id.weekCntView);
+        textViewDB3= (TextView) view.findViewById(R.id.totalCntView);
 
         textView.setText("" + MainActivity.count);
 
-        Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT * FROM COUNT",null);
+        Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+MainActivity.currentDate+"'",null);
         resultSet.moveToFirst();
-        textViewDB.setText(resultSet.getString(2));
-        Cursor resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM COUNT WHERE DATE BETWEEN 2016-05-28 AND 2016-06-03",null);
+        textViewDB.setText(resultSet.getString(0));
+        Cursor resultSet2 = MainActivity.mDatabase.rawQuery("SELECT COUNT(*) FROM WALK", null);
+        if(resultSet2 != null) {
+            resultSet2.moveToFirst();
+            int count = resultSet2.getInt(0);
+            if(count < 7){
+                resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK",null);
+            }else
+                resultSet2= MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK WHERE DATE BETWEEN '"+MainActivity.weekAgo+"' AND '"+MainActivity.currentDate+"';",null);
+        }
         resultSet2.moveToFirst();
-        textViewDB2.setText(resultSet2.getString(2));
+        textViewDB2.setText(resultSet2.getString(0));
+        Cursor resultSet3 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK",null);
+        resultSet3.moveToFirst();
+        textViewDB3.setText(resultSet2.getString(0));
 
         return view;
     }
