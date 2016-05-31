@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public static SQLiteDatabase mDatabase;
     public static String currentDate;
-    public static Calendar weekAgo;
+    public static String weekAgo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,21 +86,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         currentDate = dateFormat.format(new Date());
 
-        weekAgo = Calendar.getInstance();
-        weekAgo.add(Calendar.DATE, -7);
+        Calendar calWeekAgo = Calendar.getInstance();
+        calWeekAgo.add(Calendar.DATE, -7);
+        weekAgo = dateFormat.format(calWeekAgo.getTime());
 
         Toast.makeText(this, currentDate, Toast.LENGTH_SHORT).show();
 
         //DBOpenHelper DBHelp = new DBOpenHelper(this);
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
-        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");/*
+        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-23','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-24','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-25','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-26','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-27','1')");
+        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-28','1')");
         mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-29','1')");
         mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-30','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-06-01','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-06-02','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-06-03','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-28','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-31','1')");*/
         mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('"+currentDate+"','100')");
     }
 

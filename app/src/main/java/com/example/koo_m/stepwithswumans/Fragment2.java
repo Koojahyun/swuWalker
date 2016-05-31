@@ -45,18 +45,18 @@ public class Fragment2 extends Fragment{
         Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+MainActivity.currentDate+"'",null);
         resultSet.moveToFirst();
         textViewDB.setText(resultSet.getString(0));
-        Cursor resultSet2 = MainActivity.mDatabase.rawQuery("SELECT COUNT(*) FROM WALK", null);
+        Cursor resultSet2 = MainActivity.mDatabase.rawQuery("SELECT COUNT(*) FROM WALK;", null);
         if(resultSet2 != null) {
             resultSet2.moveToFirst();
             int count = resultSet2.getInt(0);
             if(count < 7){
-                resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK",null);
+                resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;",null);
             }else
                 resultSet2= MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK WHERE DATE BETWEEN '"+MainActivity.weekAgo+"' AND '"+MainActivity.currentDate+"';",null);
         }
         resultSet2.moveToFirst();
         textViewDB2.setText(resultSet2.getString(0));
-        Cursor resultSet3 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK",null);
+        Cursor resultSet3 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;",null);
         resultSet3.moveToFirst();
         textViewDB3.setText(resultSet2.getString(0));
 
