@@ -1,5 +1,7 @@
 package com.example.koo_m.stepwithswumans;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -93,13 +95,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
-        Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+currentDate+"';",null);
-        cursor.moveToFirst();
-        if (cursor.getColumnCount()>0) {
-            count = cursor.getInt(0);
+        try {
+            Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+currentDate+"';",null);
+            cursor.moveToFirst();
+            if (cursor.getColumnCount()!=0) {
+                count = cursor.getInt(0);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
-
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        Intent DBreset = new Intent(this, DBService.class);
+        PendingIntent pDBreset = PendingIntent.getService(this, 0, DBreset, 0);
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pDBreset);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
