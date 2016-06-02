@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Toolbar toolbar;
     private Fragment fragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
-    public static int count = 0;
+    public static int count;
     private long lastTime;
     private float speed;
     private float lastX;
@@ -93,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
+        Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+currentDate+"';",null);
+        cursor.moveToFirst();
+        if (cursor.getColumnCount()>0) {
+            count = cursor.getInt(0);
+        }
 
 
     }

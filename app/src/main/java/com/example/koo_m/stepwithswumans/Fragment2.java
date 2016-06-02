@@ -46,7 +46,6 @@ public class Fragment2 extends Fragment{
         if(cursor.getCount() != 0){
             MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='"+MainActivity.count+"' WHERE DATE='"+MainActivity.currentDate+"';");
         }else
-
             MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('"+MainActivity.currentDate+"',"+MainActivity.count+");");
 
         Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+MainActivity.currentDate+"'",null);
