@@ -87,23 +87,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         currentDate = dateFormat.format(new Date());
 
         Calendar calWeekAgo = Calendar.getInstance();
-        calWeekAgo.add(Calendar.DATE, -7);
+        calWeekAgo.add(Calendar.DATE, -6);
         weekAgo = dateFormat.format(calWeekAgo.getTime());
+        Toast.makeText(this, weekAgo, Toast.LENGTH_SHORT).show();
 
-        Toast.makeText(this, currentDate, Toast.LENGTH_SHORT).show();
-
-        //DBOpenHelper DBHelp = new DBOpenHelper(this);
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-23','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-24','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-25','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-26','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-27','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-28','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-29','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('2016-05-30','1')");
-        mDatabase.execSQL("INSERT INTO WALK('DATE','COUNT') VALUES('"+currentDate+"','100')");
+
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -280,11 +271,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 break;
 
-
             case BackgroundService.STATUS_ERROR:
                 Toast.makeText(this, "STATUS_ERROR", Toast.LENGTH_LONG).show();
                 break;
         }
     }
     //onDestory 될때 count 값 db에 저장하기
+
+    @Override
+    protected void onDestroy() {
+        onStop();
+    }
 }
