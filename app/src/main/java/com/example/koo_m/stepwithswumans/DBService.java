@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 /**
  * Created by User on 2016-06-02.
@@ -17,6 +18,7 @@ public class DBService extends Service {
 
     @Override
     public void onCreate() {
+        Toast.makeText(getApplicationContext(),"DBService Activate",Toast.LENGTH_SHORT).show();
         MainActivity.count = 0;
         super.onCreate();
     }

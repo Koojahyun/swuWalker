@@ -106,14 +106,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 18);
+        cal.set(Calendar.MINUTE, 39);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        Intent DBreset = new Intent(this, DBService.class);
+
+        Intent DBreset = new Intent(getApplicationContext(), DBService.class);
         PendingIntent pDBreset = PendingIntent.getService(this, 0, DBreset, 0);
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pDBreset);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pDBreset);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
