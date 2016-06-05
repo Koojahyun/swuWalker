@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Calendar calWeekAgo = Calendar.getInstance();
         calWeekAgo.add(Calendar.DATE, -6);
         weekAgo = dateFormat.format(calWeekAgo.getTime());
-        Toast.makeText(this, weekAgo, Toast.LENGTH_SHORT).show();
 
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 18);
+        cal.set(Calendar.HOUR_OF_DAY, 8);
         cal.set(Calendar.MINUTE, 39);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -297,9 +296,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
     //onDestory 될때 count 값 db에 저장하기
-
-    @Override
-    protected void onDestroy() {
-        onStop();
-    }
 }

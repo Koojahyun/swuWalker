@@ -20,6 +20,7 @@ public class DBService extends Service {
     public void onCreate() {
         Toast.makeText(getApplicationContext(),"DBService Activate",Toast.LENGTH_SHORT).show();
         MainActivity.count = 0;
+        BackgroundService.backcount = 0;
         super.onCreate();
     }
 }

@@ -16,7 +16,7 @@ public class BackgroundService extends IntentService implements SensorEventListe
     public static final int STATUS_FINISHED = 1;
     public static final int STATUS_ERROR = 2;
     ResultReceiver receiver = null;
-    int count;
+    public static int backcount;
     boolean isRunning = true;
     private long lastTime;
     private float speed;
@@ -40,7 +40,7 @@ public class BackgroundService extends IntentService implements SensorEventListe
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        count = intent.getExtras().getInt("count");
+        backcount = intent.getExtras().getInt("count");
         receiver = intent.getParcelableExtra("receiver");
 
         String command = intent.getStringExtra("command");
@@ -74,7 +74,7 @@ public class BackgroundService extends IntentService implements SensorEventListe
                 speed = Math.abs(x + y + z - lastX - lastY - lastZ) / gabOfTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
-                    count++;
+                    backcount++;
                 }
 
                 lastX = event.values[DATA_X];
@@ -96,7 +96,7 @@ public class BackgroundService extends IntentService implements SensorEventListe
         //증가된 카운트 값을 리턴한다.
         Bundle b = new Bundle();
         try {
-            b.putInt("back", count);
+            b.putInt("back", backcount);
             receiver.send(STATUS_FINISHED, b);
 
         } catch (Exception e) {
