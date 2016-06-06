@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 8);
-        cal.set(Calendar.MINUTE, 39);
+        cal.set(Calendar.MINUTE, 57);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
 
