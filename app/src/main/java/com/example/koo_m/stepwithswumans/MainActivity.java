@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 8);
-        cal.set(Calendar.MINUTE, 57);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
 
@@ -269,6 +269,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
         stopService(intent);
 
+       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDate = dateFormat.format(new Date());
+
+        Calendar calWeekAgo = Calendar.getInstance();
+        calWeekAgo.add(Calendar.DATE, -6);
+        weekAgo = dateFormat.format(calWeekAgo.getTime());
     }
 
     public void onReceiveResult(int resultCode, Bundle resultData) {
