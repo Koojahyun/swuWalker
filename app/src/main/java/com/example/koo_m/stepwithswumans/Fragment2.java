@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Fragment2 extends Fragment{
+public class Fragment2 extends Fragment {
     NavigationView nv;
 
     static TextView textView;
@@ -38,32 +38,32 @@ public class Fragment2 extends Fragment{
         textView = (TextView) view.findViewById(R.id.cntView);
         textViewDB = (TextView) view.findViewById(R.id.todayCntView);
         textViewDB2 = (TextView) view.findViewById(R.id.weekCntView);
-        textViewDB3= (TextView) view.findViewById(R.id.totalCntView);
+        textViewDB3 = (TextView) view.findViewById(R.id.totalCntView);
 
 
-        Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT DATE FROM WALK WHERE DATE='"+MainActivity.currentDate+"';",null);
+        Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT DATE FROM WALK WHERE DATE='" + MainActivity.currentDate + "';", null);
         cursor.moveToFirst();
-        if(cursor.getCount() != 0){
-            MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='"+MainActivity.count+"' WHERE DATE='"+MainActivity.currentDate+"';");
-        }else
-            MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('"+MainActivity.currentDate+"',"+MainActivity.count+");");
+        if (cursor.getCount() != 0) {
+            MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + MainActivity.count + "' WHERE DATE='" + MainActivity.currentDate + "';");
+        } else
+            MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('" + MainActivity.currentDate + "'," + MainActivity.count + ");");
 
-        Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+MainActivity.currentDate+"'",null);
+        Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='" + MainActivity.currentDate + "'", null);
         resultSet.moveToFirst();
         textViewDB.setText(resultSet.getString(0));
         Cursor resultSet2 = MainActivity.mDatabase.rawQuery("SELECT COUNT(*) FROM WALK;", null);
-        if(resultSet2 != null) {
+        if (resultSet2 != null) {
             resultSet2.moveToFirst();
             int count1 = resultSet2.getInt(0);
-            if(count1 < 7){
-                resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;",null);
-            }else
-                resultSet2= MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK WHERE DATE BETWEEN '"+MainActivity.weekAgo+"' AND '"+MainActivity.currentDate+"';",null);
+            if (count1 < 7) {
+                resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;", null);
+            } else
+                resultSet2 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK WHERE DATE BETWEEN '" + MainActivity.weekAgo + "' AND '" + MainActivity.currentDate + "';", null);
         }
         resultSet2.moveToFirst();
         textViewDB2.setText(resultSet2.getString(0));
 
-        Cursor resultSet3 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;",null);
+        Cursor resultSet3 = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;", null);
         resultSet3.moveToFirst();
         textViewDB3.setText(resultSet3.getString(0));
 
@@ -78,8 +78,6 @@ public class Fragment2 extends Fragment{
         nv.setCheckedItem(R.id.nav_second_fragment);
         textView.setText("" + MainActivity.count);
     }
-
-
 
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {

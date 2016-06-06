@@ -153,40 +153,40 @@ public class Fragment1 extends Fragment {
                 alert.setCancelable(true);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //지도 뜨도록 구현
-                                try {
-                                    int x = startLocation.getSelectedItemPosition();
-                                    int y = destLocation.getSelectedItemPosition();
-                                    if (x == y) {
-                                        view.setBackgroundResource(R.drawable.mapdefault1);
-                                        AlertDialog.Builder popup =  new AlertDialog.Builder(getActivity());
-                                        popup.setPositiveButton("OK",new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //지도 뜨도록 구현
+                        try {
+                            int x = startLocation.getSelectedItemPosition();
+                            int y = destLocation.getSelectedItemPosition();
+                            if (x == y) {
+                                view.setBackgroundResource(R.drawable.mapdefault1);
+                                AlertDialog.Builder popup = new AlertDialog.Builder(getActivity());
+                                popup.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.dismiss();
-                                            }
-                                        });
-                                        popup.setMessage("같은 곳을 선택했어요!");
-                                        popup.show();
-
-                                    } else {
-                                        if (x > y) {
-                                            int a = x;
-                                            int b = y;
-                                            x = b;
-                                            y = a;
-                                        }
-                                        view.setBackgroundResource(MapSelect.getImageId(x,y));
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
                                     }
-                                } catch (Exception e) {
-                                    e.getMessage();
-                                    e.getStackTrace();
+                                });
+                                popup.setMessage("같은 곳을 선택했어요!");
+                                popup.show();
+
+                            } else {
+                                if (x > y) {
+                                    int a = x;
+                                    int b = y;
+                                    x = b;
+                                    y = a;
                                 }
+                                view.setBackgroundResource(MapSelect.getImageId(x, y));
                             }
-                        });
+                        } catch (Exception e) {
+                            e.getMessage();
+                            e.getStackTrace();
+                        }
+                    }
+                });
                 alert.show();
             }
         });

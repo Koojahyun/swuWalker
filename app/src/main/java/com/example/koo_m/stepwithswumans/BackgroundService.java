@@ -10,7 +10,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
-public class BackgroundService extends IntentService implements SensorEventListener{
+public class BackgroundService extends IntentService implements SensorEventListener {
 
     public static final int STATUS_RUNNING = 0;
     public static final int STATUS_FINISHED = 1;
@@ -57,10 +57,12 @@ public class BackgroundService extends IntentService implements SensorEventListe
         }
 
     }
+
     public void onStart() {
         if (accelerormeterSensor != null)
             sensorManager.registerListener((SensorEventListener) this, accelerormeterSensor, SensorManager.SENSOR_DELAY_GAME);
     }
+
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             long currentTime = System.currentTimeMillis();
@@ -89,6 +91,7 @@ public class BackgroundService extends IntentService implements SensorEventListe
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
     public void onDestroy() {
         //카운트 값 증가시키는 루프를 중단시키고
         isRunning = false;

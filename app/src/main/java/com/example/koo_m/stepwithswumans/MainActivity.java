@@ -95,12 +95,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
         try {
-            Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='"+currentDate+"';",null);
+            Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='" + currentDate + "';", null);
             cursor.moveToFirst();
-            if (cursor.getColumnCount()!=0) {
+            if (cursor.getColumnCount() != 0) {
                 count = cursor.getInt(0);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Intent DBreset = new Intent(getApplicationContext(), DBService.class);
         PendingIntent pDBreset = PendingIntent.getService(this, 0, DBreset, 0);
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, pDBreset);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pDBreset);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
         stopService(intent);
 
-       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         currentDate = dateFormat.format(new Date());
 
         Calendar calWeekAgo = Calendar.getInstance();
