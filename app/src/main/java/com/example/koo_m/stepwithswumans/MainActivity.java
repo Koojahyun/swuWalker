@@ -269,12 +269,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
         stopService(intent);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        currentDate = dateFormat.format(new Date());
-
-        Calendar calWeekAgo = Calendar.getInstance();
-        calWeekAgo.add(Calendar.DATE, -6);
-        weekAgo = dateFormat.format(calWeekAgo.getTime());
     }
 
     public void onReceiveResult(int resultCode, Bundle resultData) {

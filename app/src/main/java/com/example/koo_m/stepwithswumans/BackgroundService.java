@@ -106,6 +106,7 @@ public class BackgroundService extends IntentService implements SensorEventListe
             b.putString(Intent.EXTRA_TEXT, e.toString());
             receiver.send(STATUS_ERROR, b);
         }
+        Fragment2.textView.setText(backcount);
     }
 
 
