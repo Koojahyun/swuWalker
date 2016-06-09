@@ -295,5 +295,4 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 break;
         }
     }
-    //onDestory 될때 count 값 db에 저장하기
 }

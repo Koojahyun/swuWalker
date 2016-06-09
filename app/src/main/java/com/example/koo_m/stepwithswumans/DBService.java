@@ -43,7 +43,7 @@ public class DBService extends Service {
         MainActivity.count = 0;
         BackgroundService.backcount = 0;
 
-        Fragment2.textView.setText(MainActivity.count);
+//        Fragment2.textView.setText(MainActivity.count);
         MainActivity.currentDate = currentDate;
         MainActivity.weekAgo = weekAgo;
 
