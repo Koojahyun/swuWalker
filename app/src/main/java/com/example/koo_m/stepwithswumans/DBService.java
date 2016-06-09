@@ -27,13 +27,15 @@ public class DBService extends Service {
         Calendar calDayAgo = Calendar.getInstance();
         calDayAgo.add(Calendar.DATE, -1);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String currentDate = dateFormat.format(new Date());
 
+        String currentDate = dateFormat.format(new Date());
         String dayAgo = dateFormat.format(calDayAgo.getTime());
+
         if (BackgroundService.backcount > 0)
             MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + BackgroundService.backcount + "' WHERE DATE='" + dayAgo + "';");
         else
             MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + MainActivity.count + "' WHERE DATE='" + dayAgo + "';");
+
         MainActivity.count = 0;
         BackgroundService.backcount = 0;
 

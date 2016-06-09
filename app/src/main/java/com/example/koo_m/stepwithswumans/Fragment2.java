@@ -79,8 +79,4 @@ public class Fragment2 extends Fragment {
         textView.setText("" + MainActivity.count);
     }
 
-
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
 }
