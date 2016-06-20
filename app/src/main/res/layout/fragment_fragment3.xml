@@ -3,14 +3,14 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#ffffff"
-             tools:context="com.example.koo_m.stepwithswumans.Fragment3">
+    tools:context="com.example.koo_m.stepwithswumans.Fragment3"
+    android:background="@drawable/swsm_chabg03">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="레밸"
+        android:text="학기"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginLeft="316dp"
         android:layout_marginTop="42dp"
@@ -48,6 +48,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/character"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

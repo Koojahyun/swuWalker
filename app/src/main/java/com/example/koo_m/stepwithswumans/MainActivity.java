@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
         mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
+
         try {
             Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='" + currentDate + "';", null);
             cursor.moveToFirst();

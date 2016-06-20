@@ -1,48 +1,48 @@
-<RelativeLayout android:id="@+id/Counter"
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.koo_m.stepwithswumans.Fragment2">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Counter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.koo_m.stepwithswumans.Fragment2">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/cntView"
         android:layout_width="194dp"
         android:layout_height="266dp"
-        android:gravity="center"
-        android:id="@+id/cntView"
-        android:layout_gravity="center_horizontal|bottom"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="87dp"
-        android:textSize="46pt"
-        android:textColor="#800080"/>
+        android:gravity="center"
+        android:textColor="#800080"
+        android:textSize="36pt" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/todayCntView"
-        android:layout_marginTop="76dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="41dp"
+        android:layout_marginTop="76dp"
         android:layout_toStartOf="@+id/weekCntView"
-        android:layout_marginEnd="41dp" />
+        android:text="New Text" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/weekCntView"
-        android:layout_alignTop="@+id/todayCntView"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:layout_alignTop="@+id/todayCntView"
+        android:layout_centerHorizontal="true"
+        android:text="New Text" />
+
+    <TextView
         android:id="@+id/totalCntView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/weekCntView"
+        android:layout_marginStart="39dp"
         android:layout_toEndOf="@+id/weekCntView"
-        android:layout_marginStart="39dp" />
+        android:text="New Text" />
 
 </RelativeLayout>
