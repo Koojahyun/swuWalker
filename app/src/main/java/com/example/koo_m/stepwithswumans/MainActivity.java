@@ -1,8 +1,10 @@
 package com.example.koo_m.stepwithswumans;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +15,7 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.DialogPreference;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -104,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             Date weekAgoDate = dateFormat.parse(weekAgo);
             if (lastDate.before(weekAgoDate)) {
                 huehak = true;
-            } else if (huehakCount <= 100) {
+            } else if (huehakCount != 0 && huehakCount <= 100) {
                 huehak = true;
             }
 
@@ -188,7 +191,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             fragmentManager.getFragments().get(backStack).onResume();
             fragmentManager.popBackStack();
         } else {
-            super.onBackPressed();
+            final AlertDialog.Builder popup = new AlertDialog.Builder(this);
+            popup.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            popup.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            popup.setMessage("종료하시겠습니까?");
+            popup.show();
         }
     }
 

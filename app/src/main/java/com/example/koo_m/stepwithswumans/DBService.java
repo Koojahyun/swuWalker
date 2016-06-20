@@ -34,16 +34,19 @@ public class DBService extends Service {
         calWeekAgo.add(Calendar.DATE, -6);
         String weekAgo = dateFormat.format(calWeekAgo.getTime());
 
-
-        if (BackgroundService.backcount > 0)
-            MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + BackgroundService.backcount + "' WHERE DATE='" + dayAgo + "';");
-        else {
-            if (MainActivity.huehak) {
-                MainActivity.mDatabase.execSQL("UPDATE WALK SET HUEHAK='" + MainActivity.huehakCount + "' WHERE DATE='" + dayAgo + "';");
-            } else
-                MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + MainActivity.count + "' WHERE DATE='" + dayAgo + "';");
+        try {
+            if (BackgroundService.backcount > 0)
+                MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + BackgroundService.backcount + "' WHERE DATE='" + dayAgo + "';");
+            else {
+                if (MainActivity.huehak) {
+                    MainActivity.mDatabase.execSQL("UPDATE WALK SET HUEHAK='" + MainActivity.huehakCount + "' WHERE DATE='" + dayAgo + "';");
+                } else
+                    MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + MainActivity.count + "' WHERE DATE='" + dayAgo + "';");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getMessage();
         }
-
         if (MainActivity.huehak) {
             MainActivity.huehakCount = 0;
         } else {
