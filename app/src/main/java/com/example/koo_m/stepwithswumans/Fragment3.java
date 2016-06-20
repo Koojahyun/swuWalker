@@ -46,62 +46,77 @@ public class Fragment3 extends Fragment {
         imageParam.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         character.setLayoutParams(imageParam);
 
-        try {
-            Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;", null);
-            resultSet.moveToFirst();
-            int totalSteps = Integer.parseInt(resultSet.getString(0));
-            if (totalSteps < 70000) {
-                character.setImageResource(R.drawable.swsm_cha01);
+        if (MainActivity.huehak) {
+            try {
+                Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT SUM(HUEHAK) FROM WALK;", null);
+                resultSet.moveToFirst();
+                int huehakSteps = Integer.parseInt(resultSet.getString(0));
+                character.setImageResource(R.drawable.swsm_cha09);
                 character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 1학년 1학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (70000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 70000 && totalSteps < 210000) {
-                character.setImageResource(R.drawable.swsm_cha02);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 1학년 2학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (210000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 210000 && totalSteps < 420000) {
-                character.setImageResource(R.drawable.swsm_cha03);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 2학년 1학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (420000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 420000 && totalSteps < 700000) {
-                character.setImageResource(R.drawable.swsm_cha04);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 2학년 2학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (700000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 700000 && totalSteps < 1050000) {
-                character.setImageResource(R.drawable.swsm_cha05);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 3학년 1학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (1050000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 1050000 && totalSteps < 1470000) {
-                character.setImageResource(R.drawable.swsm_cha06);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 3학년 2학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (1470000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 1470000 && totalSteps < 1960000) {
-                character.setImageResource(R.drawable.swsm_cha07);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 4학년 1학기 입니다.");
-                totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (1960000 - totalSteps) + " 입니다.");
-
-            } else if (totalSteps >= 1960000) {
-                character.setImageResource(R.drawable.swsm_cha08);
-                character.setVisibility(View.VISIBLE);
-                levelVal.setText("지금은 마지막 학기 입니다.");
+                levelVal.setText("지금은 휴학상태 입니다.");
+                totalStep.setText("복학까지 앞으로 남은 걸음은 " + (100 - huehakSteps) + " 입니다.");
+            }catch (Exception e){
+                e.printStackTrace();
+                e.getMessage();
             }
-        } catch (Exception e) {
-            e.getStackTrace();
-            e.getMessage();
-        }
+        } else {
 
+            try {
+                Cursor resultSet = MainActivity.mDatabase.rawQuery("SELECT SUM(COUNT) FROM WALK;", null);
+                resultSet.moveToFirst();
+                int totalSteps = Integer.parseInt(resultSet.getString(0));
+                if (totalSteps < 70000) {
+                    character.setImageResource(R.drawable.swsm_cha01);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 1학년 1학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (70000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 70000 && totalSteps < 210000) {
+                    character.setImageResource(R.drawable.swsm_cha02);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 1학년 2학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (210000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 210000 && totalSteps < 420000) {
+                    character.setImageResource(R.drawable.swsm_cha03);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 2학년 1학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (420000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 420000 && totalSteps < 700000) {
+                    character.setImageResource(R.drawable.swsm_cha04);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 2학년 2학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (700000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 700000 && totalSteps < 1050000) {
+                    character.setImageResource(R.drawable.swsm_cha05);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 3학년 1학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (1050000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 1050000 && totalSteps < 1470000) {
+                    character.setImageResource(R.drawable.swsm_cha06);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 3학년 2학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (1470000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 1470000 && totalSteps < 1960000) {
+                    character.setImageResource(R.drawable.swsm_cha07);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 4학년 1학기 입니다.");
+                    totalStep.setText("다음 학기까지 앞으로 남은 걸음은" + (1960000 - totalSteps) + " 입니다.");
+
+                } else if (totalSteps >= 1960000) {
+                    character.setImageResource(R.drawable.swsm_cha08);
+                    character.setVisibility(View.VISIBLE);
+                    levelVal.setText("지금은 마지막 학기 입니다.");
+                }
+            } catch (Exception e) {
+                e.getStackTrace();
+                e.getMessage();
+            }
+        }
         return view;
     }
 

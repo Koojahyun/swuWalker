@@ -73,6 +73,6 @@
     <string name="startLocation_prompt">강의실을 선택해주세요</string>
     <string name="destLocation_prompt">강의실을 선택해주세요</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_service">Service</string>
+    <string name="facebook_app_id">1567904180170180</string>
 </resources>

@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public static SQLiteDatabase mDatabase;
     public static String currentDate;
     public static String weekAgo;
+    public static boolean huehak = false;
+    public static int huehakCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,13 +95,35 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         weekAgo = dateFormat.format(calWeekAgo.getTime());
 
         mDatabase = openOrCreateDatabase("WALKCOUNT", MODE_PRIVATE, null);
-        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL);");
+        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS WALK(Id INTEGER PRIMARY KEY AUTOINCREMENT, Date DATE NOT NULL, Count INTEGER NOT NULL, Huehak INTEGER);");
 
         try {
-            Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='" + currentDate + "';", null);
+            Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT MAX(DATE) FROM WALK;", null);
             cursor.moveToFirst();
-            if (cursor.getColumnCount() != 0) {
-                count = cursor.getInt(0);
+            Date lastDate = dateFormat.parse(cursor.getString(0));
+            Date weekAgoDate = dateFormat.parse(weekAgo);
+            if (lastDate.before(weekAgoDate)) {
+                huehak = true;
+            } else if (huehakCount <= 100) {
+                huehak = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (huehak) {
+                Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT Huehak FROM WALK WHERE DATE='" + currentDate + "';", null);
+                cursor.moveToFirst();
+                if (cursor.getColumnCount() != 0) {
+                    huehakCount = cursor.getInt(0);
+                }
+            } else {
+                Cursor cursor = MainActivity.mDatabase.rawQuery("SELECT COUNT FROM WALK WHERE DATE='" + currentDate + "';", null);
+                cursor.moveToFirst();
+                if (cursor.getColumnCount() != 0) {
+                    count = cursor.getInt(0);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,9 +165,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             case R.id.nav_third_fragment:
                 fragmentClass = Fragment3.class;
                 break;
-            case R.id.nav_forth_fragment:
-                fragmentClass = Fragment4.class;
-                break;
             default:
                 fragmentClass = Fragment1.class;
         }
@@ -154,8 +175,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             e.printStackTrace();
         }
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).addToBackStack(null).commit();
-        //fragment 자채에서 Navigation Drawer View 접근해서 menuItem 을 체크하게 만들었습니다
-        //menuItem.setChecked(true);
         drawer.closeDrawers();
     }
 
@@ -220,7 +239,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         final Intent intent = new Intent(Intent.ACTION_SYNC, null, this, BackgroundService.class);
 
-        intent.putExtra("count", count);
+        if (huehak) {
+            intent.putExtra("count", huehakCount);
+        } else {
+            intent.putExtra("count", count);
+        }
         intent.putExtra("receiver", mReceiver);
         intent.putExtra("command", "increase count");
         startService(intent);
@@ -241,9 +264,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 speed = Math.abs(x + y + z - lastX - lastY - lastZ) / gabOfTime * 10000;
 
                 if (speed > SHAKE_THRESHOLD) {
-                    ++count;
+                    if (huehak) {
+                        ++huehakCount;
+                    } else {
+                        ++count;
+                    }
                     int backStack = fragmentManager.getBackStackEntryCount();
                     fragmentManager.getFragments().get(backStack).onResume();
+
                 }
 
                 lastX = event.values[DATA_X];
@@ -282,11 +310,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             case BackgroundService.STATUS_FINISHED:
 
-                count = resultData.getInt("back");
-                String str = Integer.toString(count);
-
-                Fragment2.textView.setText(str);
-
+                if (huehak) {
+                    huehakCount = resultData.getInt("back");
+                    String str = Integer.toString(huehakCount);
+                    Fragment2.textView.setText(str);
+                } else {
+                    count = resultData.getInt("back");
+                    String str = Integer.toString(count);
+                    Fragment2.textView.setText(str);
+                }
                 Toast.makeText(this, "STATUS_FINISHED", Toast.LENGTH_LONG).show();
 
                 break;

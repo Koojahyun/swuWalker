@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -33,9 +34,9 @@ import java.util.zip.Inflater;
 
 public class Fragment1 extends Fragment {
     ImageView map1;
-    Button b2;
-    Button b3;
-    Button b4;
+    ImageButton b2;
+    ImageButton b3;
+    ImageButton b4;
     NavigationView nv;
     String[] building = {"정문", "남문", "체육관", "50주년 기념관", "기독교 교육관", "인문사회관", "대강당", "제1과학관", "제2과학관", "누리관", "중앙도서관", "바롬인성교육관", "예능관"};
 
@@ -48,14 +49,13 @@ public class Fragment1 extends Fragment {
         final View view = inflater.inflate(R.layout.content_main, container, false);
 
         nv = (NavigationView) getActivity().findViewById(R.id.nav_view);
-        b2 = (Button) view.findViewById(R.id.button2);
-        b3 = (Button) view.findViewById(R.id.button3);
-        b4 = (Button) view.findViewById(R.id.button4);
+        b2 = (ImageButton) view.findViewById(R.id.button2);
+        b3 = (ImageButton) view.findViewById(R.id.button3);
+        b4 = (ImageButton) view.findViewById(R.id.button4);
 
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "다이어트를 선택하셨습니다", Toast.LENGTH_SHORT).show();
                 PopupMenu popup = new PopupMenu(getActivity(), b2);
                 popup.getMenuInflater().inflate(R.menu.diet_popup, popup.getMenu());
 
@@ -90,7 +90,6 @@ public class Fragment1 extends Fragment {
         b3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "산책을 선택하셨습니다", Toast.LENGTH_SHORT).show();
                 PopupMenu popup = new PopupMenu(getActivity(), b3);
                 popup.getMenuInflater().inflate(R.menu.walk_popup, popup.getMenu());
 

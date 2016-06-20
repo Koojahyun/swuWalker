@@ -37,17 +37,27 @@ public class DBService extends Service {
 
         if (BackgroundService.backcount > 0)
             MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + BackgroundService.backcount + "' WHERE DATE='" + dayAgo + "';");
-        else
-            MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + MainActivity.count + "' WHERE DATE='" + dayAgo + "';");
+        else {
+            if (MainActivity.huehak) {
+                MainActivity.mDatabase.execSQL("UPDATE WALK SET HUEHAK='" + MainActivity.huehakCount + "' WHERE DATE='" + dayAgo + "';");
+            } else
+                MainActivity.mDatabase.execSQL("UPDATE WALK SET COUNT='" + MainActivity.count + "' WHERE DATE='" + dayAgo + "';");
+        }
 
-        MainActivity.count = 0;
+        if (MainActivity.huehak) {
+            MainActivity.huehakCount = 0;
+        } else {
+            MainActivity.count = 0;
+        }
         BackgroundService.backcount = 0;
 
-//        Fragment2.textView.setText(MainActivity.count);
         MainActivity.currentDate = currentDate;
         MainActivity.weekAgo = weekAgo;
 
-        MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('" + currentDate + "'," + MainActivity.count + ");");
+        if (MainActivity.huehak) {
+            MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT,HUEHAK) VALUES ('" + currentDate + "'," + 0 + "," + MainActivity.huehakCount + ");");
+        } else
+            MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('" + currentDate + "'," + MainActivity.count + ");");
         super.onCreate();
     }
 }
