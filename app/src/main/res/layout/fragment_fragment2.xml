@@ -3,46 +3,79 @@
     android:id="@+id/Counter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.koo_m.stepwithswumans.Fragment2">
+    tools:context="com.example.koo_m.stepwithswumans.Fragment2"
+    android:background="@drawable/swsm_countbg">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/cntView"
-        android:layout_width="194dp"
-        android:layout_height="266dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="87dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#800080"
-        android:textSize="36pt" />
+        android:textColor="#f47171"
+        android:textSize="36pt"
+        android:layout_marginTop="180dp"
+        android:layout_below="@+id/todayCntView"
+        android:layout_centerHorizontal="true" />
+
 
     <TextView
         android:id="@+id/todayCntView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="New Text"
+        android:textSize="15pt"
+        android:layout_marginTop="122dp"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="41dp"
-        android:layout_marginTop="76dp"
         android:layout_toStartOf="@+id/weekCntView"
-        android:text="New Text" />
+        android:layout_marginEnd="68dp" />
 
     <TextView
         android:id="@+id/weekCntView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="New Text"
+        android:textSize="15pt"
         android:layout_alignTop="@+id/todayCntView"
-        android:layout_centerHorizontal="true"
-        android:text="New Text" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/totalCntView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="New Text"
+        android:textSize="15pt"
         android:layout_alignTop="@+id/weekCntView"
-        android:layout_marginStart="39dp"
         android:layout_toEndOf="@+id/weekCntView"
-        android:text="New Text" />
+        android:layout_marginStart="75dp" />
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignParentStart="false"
+        android:layout_alignEnd="@id/todayCntView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일주일"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="총합"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/totalCntView"
+        android:layout_marginTop="54dp"/>
 </RelativeLayout>

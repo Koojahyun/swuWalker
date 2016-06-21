@@ -60,7 +60,7 @@ public class DBService extends Service {
         if (MainActivity.huehak) {
             MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT,HUEHAK) VALUES ('" + currentDate + "'," + 0 + "," + MainActivity.huehakCount + ");");
         } else
-            MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('" + currentDate + "'," + MainActivity.count + ");");
+               MainActivity.mDatabase.execSQL("INSERT INTO WALK (DATE,COUNT) VALUES ('" + currentDate + "'," + MainActivity.count + ");");
         super.onCreate();
     }
 }

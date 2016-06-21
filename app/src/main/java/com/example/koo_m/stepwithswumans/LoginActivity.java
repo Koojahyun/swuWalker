@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onSuccess(LoginResult loginResult) {
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivity(intent);
             loginStateEditor.putBoolean("success_login", true);
             loginStateEditor.commit();
@@ -75,11 +75,13 @@ public class LoginActivity extends AppCompatActivity {
         loginStateEditor = sharedPref.edit();
 
         if (sharedPref.getBoolean("success_login", false)) {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivity(i);
             finish();
         }
     }
+
+
 
 
     @Override
@@ -98,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClick(View v) {
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
         startActivity(intent);
     }
 

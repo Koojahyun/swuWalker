@@ -75,4 +75,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_service">Service</string>
     <string name="facebook_app_id">1567904180170180</string>
+
+    <string name="next">다음</string>
+    <string name="skip">건너뛰기</string>
+    <string name="start">시작하기</string>
 </resources>
